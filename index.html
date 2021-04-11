@@ -1,0 +1,359 @@
+<div id="exmpl_form_1" class="form_cnt">
+  <div id="exmpl_form_1_content">
+  </div>
+  <div class="json_info" title="JSON info print">
+    <i>i</i>
+    <pre id="exmpl_form_1_json">
+    </pre>
+  </div>
+</div>
+
+<div id="exmpl_form_2" class="form_cnt">
+  <div id="exmpl_form_2_content">
+  </div>
+  <div class="json_info" title="JSON info print">
+    <i>i</i>
+    <pre id="exmpl_form_2_json">
+    </pre>
+  </div>
+</div>
+
+<div id="exmpl_form_3" class="form_cnt">
+  <div id="exmpl_form_3_content">
+  </div>
+  <div class="json_info" title="JSON info print">
+    <i>i</i>
+    <pre id="exmpl_form_3_json">
+    </pre>
+  </div>
+</div>
+
+<div id="exmpl_form_4" class="form_cnt">
+  <div id="exmpl_form_4_content">
+  </div>
+  <div class="json_info" title="JSON info print">
+    <i>i</i>
+    <pre id="exmpl_form_4_json">
+    </pre>
+  </div>
+</div>
+
+<div id="exmpl_form_5" class="form_cnt">
+  <div id="exmpl_form_5_content">
+  </div>
+  <div class="json_info" title="JSON info print">
+    <i>i</i>
+    <pre id="exmpl_form_5_json" >
+    </pre>
+  </div>
+</div>
+
+
+<!---------------------->
+<!---------------------->
+
+<style>
+body{
+  display: flex;
+  flex-direction: column;
+  /*background: #222222;*/
+  font-family: monospace;
+}
+
+.form_cnt {
+  border: 2px solid #A0A0A0;
+  padding: 2em;
+  margin: 1em;
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+
+pre {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+  transition: 0.5s ease all;
+}
+
+.json_info {
+  display: flex;
+  position: relative;
+  border: 1px solid gray;
+  cursor: help;
+  position: absolute;
+  top: .25em; 
+  right: .25em;
+  color: green;
+}
+.json_info i {
+  width: 1.75em;
+  height: 1.75em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.json_info:hover i {
+  color: white;
+  background: green;
+  transform: scale(1.5);
+  box-shadow: 0 5px 10px gray;
+}
+
+.json_info:hover pre {
+  opacity: .875;
+  height: auto;
+  background: white;
+  border: 1px solid #A0A0A0;
+  padding: 1em;
+  top: .5em;
+  right: .5em;
+  z-index: 20;
+  box-shadow: 0 5px 10px gray;
+}
+</style>
+
+<script>
+function makeForm(form_obj){
+  if ( typeof(form_obj.container) !== "undefined" ) {
+    console.log("[ FOUND >> form_obj.container :: "+ form_obj.container +" :@: "+ Date.now()+ " ]");
+    //PRINTING JSON INFORMATION
+    document.querySelector( form_obj.container+"_json" ).innerHTML = JSON.stringify(form_obj, undefined, 2);
+    
+    if ( typeof(form_obj.title) !== "undefined" ) {
+      document.querySelector( form_obj.container+"_content" ).innerHTML += `<h2>`+form_obj.title+`</h2>`;
+    }
+    
+    if ( typeof(form_obj.subtitle) !== "undefined" ) {
+      document.querySelector( form_obj.container+"_content" ).innerHTML += `<h4>`+form_obj.subtitle+`</h4>`;
+    }
+    
+    form_obj.items.forEach(function(item){
+      console.log(item.id);
+    })
+    
+  } else {
+    console.error("Form Object Missing Parent Container Selector :>: form_obj.[container] is not defind :: uses querySelector to find it. :@: "+ Date.now() +" ;");
+    console.trace();
+  }
+}
+
+
+
+var example_1 = {
+  container : "#exmpl_form_1",
+  title: "Exmple_Form_1 Title",
+  items: [
+    {
+      id: 'exmpl_name_1',
+      type: 'first_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_last_name_1',
+      type: 'last_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_mobile_1',
+      type: 'phone',
+      validate: true
+    },
+    {
+      id: 'exmpl_email_1',
+      type: 'email',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_save_1',
+      type: 'button',
+      callback(){
+        alert('[ exmpl_save_1 click >> save data ]')
+      }
+    }
+  ]
+}
+
+
+
+var example_2 = {
+  container : "#exmpl_form_2",
+  title: "WOHO Some Exmple_Form_2 Title",
+  subtitle: "No-subject subtitle for this object.",
+  items: [
+    {
+      id: 'exmpl_name_2',
+      type: 'first_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_last_name_2',
+      type: 'last_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_mobile_2',
+      type: 'phone',
+      validate: true
+    },
+    {
+      id: 'exmpl_email_2',
+      type: 'email',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_save_2',
+      type: 'button',
+      callback(){
+        alert('[ exmpl_save_2 click >> save data ]')
+      }
+    }
+  ]
+}
+
+
+
+
+
+var example_3 = {
+  container : "#exmpl_form_3",
+  title: "Exmple_Form_3 Title SPACE TAKING",
+  subtitle: "No-subject subtitle for this object.",
+  items: [
+    {
+      id: 'exmpl_name_2',
+      type: 'first_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_last_name_2',
+      type: 'last_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_mobile_2',
+      type: 'phone',
+      validate: true
+    },
+    {
+      id: 'exmpl_email_2',
+      type: 'email',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_save_2',
+      type: 'button',
+      callback(){
+        alert('[ exmpl_save_2 click >> save data ]')
+      }
+    }
+  ]
+}
+
+
+
+
+
+var example_4 = {
+  container : "#exmpl_form_4",
+  title: "Exmple_Form_4 Title Text FoR",
+  subtitle: "No-subject subtitle for this object.",
+  items: [
+    {
+      id: 'exmpl_name_2',
+      type: 'first_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_last_name_2',
+      type: 'last_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_mobile_2',
+      type: 'phone',
+      validate: true
+    },
+    {
+      id: 'exmpl_email_2',
+      type: 'email',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_save_2',
+      type: 'button',
+      callback(){
+        alert('[ exmpl_save_2 click >> save data ]')
+      }
+    }
+  ]
+}
+
+
+
+
+
+var example_5 = {
+  container : "#exmpl_form_5",
+  title: "Exmple_Form_5 Title",
+  subtitle: "No-subject subtitle for this object.",
+  items: [
+    {
+      id: 'exmpl_name_2',
+      type: 'first_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_last_name_2',
+      type: 'last_name',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_mobile_2',
+      type: 'phone',
+      validate: true
+    },
+    {
+      id: 'exmpl_email_2',
+      type: 'email',
+      validate: true,
+      clearBtn: true
+    },
+    {
+      id: 'exmpl_save_2',
+      type: 'button',
+      callback(){
+        alert('[ exmpl_save_2 click >> save data ]')
+      }
+    }
+  ]
+}
+
+
+
+window.onload = function(){
+  makeForm(example_1);
+  makeForm(example_2);
+  makeForm(example_3);
+  makeForm(example_4);
+  makeForm(example_5);
+}
+</script>
