@@ -1,2 +1,2 @@
-# A-O._.FIG
-A^O_Tools :=> FIG [ Form Inputs Generator ] 
+# [ A^O_Tools ]._.FIG
+A^O_Tools item :=> FIG [ Form Inputs Generator ] 
